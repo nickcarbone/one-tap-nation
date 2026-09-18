@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One Tap Nation</title>
+<meta name="description" content="A field guide to 20 apps that swallowed a country: how they began, what they do, what they mean to the people who use them, and who pays for the convenience.">
+<style>
+:root{
+  --bg:#f2f2f7; --card:#ffffff; --card2:#f7f7fa; --ink:#111114; --ink2:#3c3c43; --muted:#6e6e76;
+  --line:rgba(60,60,67,.14); --tint:#0a84ff; --pink:#ff375f; --amber:#ff9f0a; --green:#30d158;
+  --glass:rgba(255,255,255,.62); --glass-line:rgba(255,255,255,.55);
+  --shadow:0 10px 30px rgba(20,20,40,.12), 0 2px 6px rgba(20,20,40,.06);
+  --radius:22px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --round:ui-rounded,"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000000; --card:#1c1c1e; --card2:#232326; --ink:#f5f5f7; --ink2:#d1d1d6; --muted:#98989f;
+    --line:rgba(255,255,255,.12); --glass:rgba(30,30,34,.62); --glass-line:rgba(255,255,255,.12);
+    --shadow:0 10px 30px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--tint)}
+button{font:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* ---------- HERO ---------- */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:56px 0 40px}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:28px;padding:28px 0 20px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--round);font-weight:700;font-size:13px;letter-spacing:.02em;
+  background:var(--card);border:1px solid var(--line);padding:6px 12px 6px 8px;border-radius:999px;box-shadow:var(--shadow)}
+.eyebrow i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#ff375f,#ff9f0a);display:inline-block}
+h1{font-family:var(--round);font-size:clamp(46px,8vw,92px);line-height:.95;letter-spacing:-.035em;margin:18px 0 14px;font-weight:800}
+h1 .g{background:linear-gradient(100deg,#0a84ff 0%,#bf5af2 45%,#ff375f 80%,#ff9f0a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dek{font-size:clamp(18px,2.2vw,21px);color:var(--ink2);max-width:36ch;margin:0 0 22px}
+.stats{display:flex;flex-wrap:wrap;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--round);font-size:22px;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* ---------- PHONE ---------- */
+.phone-col{display:flex;justify-content:center}
+.phone{position:relative;width:min(100%,400px);border-radius:56px;padding:12px;background:linear-gradient(145deg,#2b2b30,#0d0d10);
+  box-shadow:0 40px 80px rgba(20,20,60,.28),0 0 0 2px rgba(255,255,255,.06) inset}
+.screen{position:relative;border-radius:46px;overflow:hidden;min-height:760px;
+  background:
+   radial-gradient(120% 80% at 10% 0%,#7c5cff 0%,transparent 55%),
+   radial-gradient(90% 70% at 100% 30%,#ff5e8a 0%,transparent 55%),
+   radial-gradient(120% 90% at 50% 110%,#16c3ff 0%,transparent 60%),
+   linear-gradient(180deg,#3b2a8f,#1b1446);
+  color:#fff;padding:14px 16px 118px}
+.blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:float 14s ease-in-out infinite}
+.blob.a{width:220px;height:220px;background:#ffcc00;top:40%;left:-60px}
+.blob.b{width:180px;height:180px;background:#34c759;top:10%;right:-50px;animation-delay:-5s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-40px)}}
+@media (prefers-reduced-motion: reduce){.blob{animation:none}}
+.statusbar{position:relative;display:flex;justify-content:space-between;align-items:center;font-family:var(--round);font-weight:700;font-size:15px;padding:4px 14px 0}
+.island{position:absolute;left:50%;top:0;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:20px}
+.sb-right{display:flex;gap:6px;align-items:center}
+.sb-right svg{display:block}
+.notif{position:relative;margin:18px 2px 12px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:22px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.18);
+  animation:drop .9s cubic-bezier(.2,1.4,.4,1) .5s both}
+@keyframes drop{from{transform:translateY(-40px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.notif .ni{flex:0 0 38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#ff375f,#ff9f0a);display:grid;place-items:center}
+.notif b{font-size:14px}
+.notif small{float:right;opacity:.75;font-size:12px;margin-left:8px}
+.notif p{margin:2px 0 0;font-size:13.5px;line-height:1.35}
+.spot{position:relative;display:flex;align-items:center;gap:8px;margin:4px 2px 14px;padding:9px 12px;border-radius:14px;
+  background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2)}
+.spot input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;font-size:16px;font-family:var(--font)}
+.spot input::placeholder{color:rgba(255,255,255,.75)}
+.grid{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px}
+.app{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;cursor:pointer;
+  transition:transform .35s cubic-bezier(.2,1.5,.4,1),opacity .3s;-webkit-tap-highlight-color:transparent}
+.app:hover .icon{transform:translateY(-3px) scale(1.06) rotate(-2deg)}
+.app:active .icon{transform:scale(.9)}
+.app:focus-visible{outline:none}
+.app:focus-visible .icon{box-shadow:0 0 0 3px #fff,0 0 0 6px #0a84ff}
+.icon{position:relative;width:62px;height:62px;border-radius:15px;display:grid;place-items:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .35s cubic-bezier(.2,1.5,.4,1)}
+@media (max-width:380px){.icon{width:54px;height:54px;border-radius:13px}}
+.icon svg{width:58%;height:58%}
+.icon .flag{position:absolute;right:-6px;bottom:-6px;font-size:17px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.icon .badge{position:absolute;top:-7px;right:-7px;min-width:22px;height:22px;border-radius:11px;background:#ff3b30;color:#fff;font:700 13px/22px var(--round);text-align:center;padding:0 5px;box-shadow:0 0 0 2px rgba(0,0,0,.15)}
+.app .lbl{font-size:12px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.45);white-space:nowrap;max-width:78px;overflow:hidden;text-overflow:ellipsis}
+.app.dim{opacity:.18;transform:scale(.88)}
+.jiggle .icon{animation:jig .28s ease-in-out infinite alternate}
+.jiggle .app:nth-child(2n) .icon{animation-delay:-.14s}
+@keyframes jig{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+.dots{display:flex;justify-content:center;gap:6px;margin:18px 0 0}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4)}
+.dots i:first-child{background:#fff}
+.dock{position:absolute;left:12px;right:12px;bottom:24px;padding:10px;border-radius:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;
+  background:rgba(255,255,255,.22);backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);border:1px solid rgba(255,255,255,.25)}
+.chip{flex:0 0 auto;border:0;cursor:pointer;padding:7px 11px;border-radius:999px;font:700 13px var(--round);color:#fff;background:rgba(255,255,255,.14);transition:background .2s,transform .2s}
+.chip:hover{transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:#fff;color:#1b1446}
+.homebar{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.85);border:0;padding:0;cursor:pointer}
+.hint{font-size:13px;color:var(--muted);text-align:center;margin:12px 0 0}
+
+/* ---------- SECTIONS ---------- */
+section.block{padding:30px 0}
+.sec-title{font-family:var(--round);font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;margin:0 0 6px;font-weight:800}
+.sec-sub{color:var(--muted);margin:0 0 20px;max-width:70ch}
+.today{position:relative;overflow:hidden;border-radius:28px;padding:30px;color:#fff;box-shadow:var(--shadow);
+  background:linear-gradient(135deg,#0a84ff,#5e5ce6 50%,#bf5af2)}
+.today .k{font:800 13px var(--round);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.today h2{font-family:var(--round);font-size:clamp(26px,4vw,40px);line-height:1.05;margin:6px 0 14px;letter-spacing:-.02em}
+.today p{max-width:72ch;margin:0 0 12px;font-size:17px;opacity:.95}
+.today .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media (max-width:760px){.today .cols{grid-template-columns:1fr}}
+.today .cols div{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:14px}
+.today .cols b{display:block;font-family:var(--round);font-size:16px;margin-bottom:4px}
+.today .cols span{font-size:14.5px;opacity:.92}
+
+/* library list */
+.segs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.seg{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 13px;font:700 13px var(--round);cursor:pointer;color:var(--ink2)}
+.seg[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.library{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:none;border:0;padding:12px 16px;cursor:pointer;position:relative}
+.row + .row::before{content:"";position:absolute;left:84px;right:0;top:0;height:1px;background:var(--line)}
+.row:hover{background:var(--card2)}
+.row .icon{width:52px;height:52px;border-radius:13px;flex:0 0 auto}
+.row .icon .flag{font-size:15px}
+.row .txt{flex:1;min-width:0}
+.row .t1{font-weight:700;font-size:16.5px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.row .t1 em{font-style:normal;font-weight:500;color:var(--muted);font-size:14px}
+.row .t2{color:var(--ink2);font-size:14.5px;line-height:1.35;margin-top:1px}
+.row .get{flex:0 0 auto;font:800 13px var(--round);color:var(--tint);background:rgba(10,132,255,.12);border-radius:999px;padding:6px 14px}
+.row[hidden]{display:none}
+.empty{display:none;padding:28px;text-align:center;color:var(--muted)}
+
+/* ---------- SHEET ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.38);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;z-index:50;width:min(680px,100%);height:min(94vh,94dvh);transform:translate(-50%,105%);
+  background:var(--bg);border-radius:28px 28px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25);transition:transform .45s cubic-bezier(.2,1,.3,1);display:flex;flex-direction:column}
+.sheet.on{transform:translate(-50%,0)}
+@media (prefers-reduced-motion: reduce){.sheet{transition:none}}
+.sheet-top{flex:0 0 auto;padding:8px 16px 8px;position:relative}
+.grabber{display:block;width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 6px;border:0;padding:0;cursor:pointer}
+.sheet-nav{display:flex;justify-content:space-between;align-items:center}
+.nbtn{border:0;background:var(--card);border-radius:999px;padding:7px 12px;font:700 13px var(--round);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.nbtn.x{width:32px;height:32px;padding:0;display:grid;place-items:center;font-size:16px}
+.sheet-body{flex:1;overflow-y:auto;padding:4px 16px 40px;-webkit-overflow-scrolling:touch}
+.sh-head{display:flex;gap:16px;align-items:center;margin:6px 0 14px}
+.sh-head .icon{width:88px;height:88px;border-radius:21px;flex:0 0 auto}
+.sh-head .icon .flag{font-size:24px;right:-8px;bottom:-8px}
+.sh-head h2{font-family:var(--round);font-size:30px;line-height:1.05;margin:0;letter-spacing:-.02em}
+.sh-head .sub{color:var(--muted);font-size:15px;margin-top:3px}
+.sh-head .tag{color:var(--ink2);font-size:15.5px;margin-top:6px;font-style:italic}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+@media (max-width:480px){.pills{grid-template-columns:1fr}}
+.pill{background:var(--card);border-radius:16px;padding:10px 12px}
+.pill b{display:block;font:800 11px var(--round);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.pill span{font-size:14.5px;font-weight:600}
+.caveat{display:flex;gap:10px;background:rgba(255,159,10,.14);border:1px solid rgba(255,159,10,.45);border-radius:18px;padding:12px 14px;margin:0 0 12px}
+.caveat .ci{flex:0 0 28px;height:28px;border-radius:8px;background:var(--amber);color:#fff;display:grid;place-items:center;font-weight:900}
+.caveat b{display:block;font:800 12px var(--round);letter-spacing:.07em;text-transform:uppercase;color:#b26b00;margin-bottom:2px}
+@media (prefers-color-scheme: dark){.caveat b{color:#ffb340}}
+.caveat p{margin:0;font-size:15px}
+.bench{background:rgba(10,132,255,.12);border:1px solid rgba(10,132,255,.35);border-radius:18px;padding:12px 14px;margin:0 0 12px;font-size:15px}
+.bench b{font:800 12px var(--round);letter-spacing:.07em;text-transform:uppercase;color:var(--tint);display:block;margin-bottom:2px}
+.dofirst{display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:18px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.dofirst .di{flex:0 0 30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#30d158,#0a84ff);display:grid;place-items:center;color:#fff;font-weight:900}
+.dofirst b{display:block;font:800 12px var(--round);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.dofirst p{margin:1px 0 0;font-size:15.5px;font-weight:500}
+.lingo{display:inline-flex;gap:8px;align-items:center;background:linear-gradient(135deg,rgba(191,90,242,.16),rgba(255,55,95,.14));border-radius:14px;padding:8px 12px;margin:0 0 14px;font-size:14.5px}
+.lingo b{font:800 12px var(--round);letter-spacing:.07em;text-transform:uppercase;color:#bf5af2}
+.card{background:var(--card);border-radius:20px;padding:16px 16px 6px;margin:0 0 12px}
+.card h3{font:800 13px var(--round);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.card p{margin:0 0 10px;font-size:16.5px;line-height:1.55}
+.card.fine{background:linear-gradient(180deg,rgba(255,55,95,.08),rgba(255,55,95,.02)),var(--card);border:1px solid rgba(255,55,95,.25)}
+.card.fine h3{color:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chips span{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:13.5px;font-weight:600}
+details.src{background:var(--card);border-radius:18px;padding:12px 16px;margin:0 0 12px}
+details.src summary{cursor:pointer;font:800 13px var(--round);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+details.src ol{margin:10px 0 2px;padding-left:20px;font-size:14px}
+details.src li{margin:0 0 5px;word-break:break-word}
+
+/* footer */
+footer{margin-top:30px;padding:36px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
+footer .fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:760px){footer .fcols{grid-template-columns:1fr}}
+footer h4{font:800 13px var(--round);letter-spacing:.07em;text-transform:uppercase;color:var(--ink);margin:0 0 6px}
+footer p{margin:0 0 8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+body.lock{overflow:hidden}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <span class="eyebrow"><i aria-hidden="true"></i>A field guide · September 2026</span>
+      <h1>One Tap <span class="g">Nation.</span></h1>
+      <p class="dek">Twenty apps you've probably never opened, each one the way a country moves, eats, pays, talks or deals with its government. How they began, what they do, what they mean, and who pays for the convenience.</p>
+      <div class="stats">
+        <div class="stat"><b>20</b><span>apps, one per country</span></div>
+        <div class="stat"><b>5</b><span>regions</span></div>
+        <div class="stat"><b>2B+</b><span>combined reported users</span></div>
+        <div class="stat"><b>1</b><span>benchmark exception</span></div>
+      </div>
+    </div>
+
+    <div class="phone-col">
+      <div class="phone">
+        <div class="screen" id="screen">
+          <span class="blob a" aria-hidden="true"></span><span class="blob b" aria-hidden="true"></span>
+          <div class="statusbar">
+            <span id="clock">9:41</span>
+            <span class="island" aria-hidden="true"></span>
+            <span class="sb-right" aria-hidden="true">
+              <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#fff"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#fff"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#fff"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#fff"/></svg>
+              <svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3.5" fill="none" stroke="#fff" opacity=".6"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#fff"/><rect x="24" y="4" width="1.5" height="4" rx=".7" fill="#fff" opacity=".6"/></svg>
+            </span>
+          </div>
+
+          <div class="notif" role="status">
+            <span class="ni" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v10M7 8l5 5 5-5M5 20h14"/></svg></span>
+            <div><b>One Tap Nation</b><small>now</small>
+              <p>Tap any app to open its story. Red badges mark the two entries with a context note: Russia and Iran.</p></div>
+          </div>
+
+          <label class="spot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+            <span class="sr">Search apps or countries</span>
+            <input id="search" type="search" placeholder="Search app or country" autocomplete="off">
+          </label>
+
+          <div class="grid" id="grid" aria-label="Apps"></div>
+          <div class="dots" aria-hidden="true"><i></i><i></i></div>
+
+          <div class="dock" id="dock" role="toolbar" aria-label="Filter by region"></div>
+          <button class="homebar" id="homebar" aria-label="Wiggle mode"></button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <p class="hint">Tip: the dock filters by region. Tap the home bar for a surprise.</p>
+
+  <section class="block">
+    <article class="today">
+      <div class="k">Today · The Story</div>
+      <h2>The app that swallowed a country</h2>
+      <p>In most of the world, the most important app on a phone isn't one an American has heard of. It started as one thing: a call centre for motorbike taxis, a text message that moved money, a messenger built after an earthquake. Then it became the way a country moves, eats and pays. Its drivers, couriers and cash agents became a visible class of worker, and its outages became national emergencies.</p>
+      <p>This guide picks one per country. The test: the app locals would say you can't function without, backed by penetration data. Regional giants such as Grab, Rappi, Careem and Yandex Go are filed under the country where they were born, with their wider reach noted.</p>
+      <div class="cols">
+        <div><b>Why so much Asia?</b><span>Super-apps are largely an Asian invention, and the list reflects that: 9 of the 20 sit in our Asia filter, plus 2 more in the Middle East. The rest span Europe, Africa and Latin America.</span></div>
+        <div><b>Read the fine print</b><span>Every entry has a red "fine print" card covering labour, outages, data and state power. Russia and Iran also carry an amber context note on the authoritarian systems their apps operate within.</span></div>
+        <div><b>About the numbers</b><span>Figures are the latest we could verify as of 18 September 2026 and are mostly company-reported. "Users" means different things to different firms (registered, monthly active, 90-day active), so each card says which.</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="block" id="library-sec">
+    <h2 class="sec-title">App Library</h2>
+    <p class="sec-sub">All 20 in one list, by kind of app. Tap a row for the full story.</p>
+    <div class="segs" id="segs" role="toolbar" aria-label="Filter by type"></div>
+    <div class="library" id="library"></div>
+    <div class="empty" id="empty">No apps match. Try another filter.</div>
+  </section>
+
+  <footer>
+    <div class="fcols">
+      <div><h4>How we chose</h4><p>One app per country, chosen because locals treat it as indispensable and adoption data backs that up. WeChat is included as the benchmark every other super-app chased, the lone exception to the "unknown abroad" rule.</p></div>
+      <div><h4>What we checked</h4><p>Histories, figures and controversies were checked against company filings, regulators, and reporting from outlets including Reuters, Bloomberg, Meduza, Rest of World, The Korea Herald, Tuoi Tre and TechCabal. Sources are listed on every card. Ongoing stories (the Grab–GoTo talks, GCash's IPO, Iran's connectivity) may have moved since publication.</p></div>
+      <div><h4>A note on design</h4><p>Icons are invented glyphs, not the apps' real logos, and colours are not brand colours. No trademarks are reproduced. Built as a single self-contained page; it works offline.</p></div>
+    </div>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
+  <div class="sheet-top">
+    <button class="grabber" id="grabber" aria-label="Close"></button>
+    <div class="sheet-nav">
+      <button class="nbtn" id="prev">‹ Prev</button>
+      <span id="pos" style="font:700 13px var(--round);color:var(--muted)"></span>
+      <span style="display:flex;gap:8px"><button class="nbtn" id="next">Next ›</button><button class="nbtn x" id="close" aria-label="Close">✕</button></span>
+    </div>
+  </div>
+  <div class="sheet-body" id="sheet-body"></div>
+</div>
+
+<script>
+const GLYPH = {
+  chat:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8A2.5 2.5 0 0 1 17.5 16H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z"/><circle cx="9" cy="9.5" r=".6" fill="#fff"/><circle cx="12" cy="9.5" r=".6" fill="#fff"/><circle cx="15" cy="9.5" r=".6" fill="#fff"/>',
+  moto:'<circle cx="5.5" cy="16.5" r="3"/><circle cx="18.5" cy="16.5" r="3"/><path d="M5.5 16.5l4-6h5l4 6M14.5 10.5l-2-4h-3M17 6.5h2.5"/>',
+  car:'<path d="M3.5 15.5v-3l2-5h13l2 5v3a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1zM3.5 12.5h17"/><circle cx="7.5" cy="16.5" r="1.8"/><circle cx="16.5" cy="16.5" r="1.8"/>',
+  bag:'<path d="M5 8h14l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H7.7a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/>',
+  cart:'<path d="M3 4h2.5l2.2 11h10.3l2-8H6.3"/><circle cx="9" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>',
+  send:'<rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10 12h4.5M12.5 9.8l2.2 2.2-2.2 2.2"/><path d="M10.5 18.5h3"/>',
+  wallet:'<path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><path d="M20 10h-4a2 2 0 0 0 0 4h4"/>',
+  bolt:'<path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z"/>',
+  qr:'<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2M20 14v6h-6M17 17v3"/>',
+  id:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.8 16c.6-1.4 1.6-2 2.7-2s2.1.6 2.7 2M14 10h4.5M14 13.5h3"/>',
+  bowl:'<path d="M3.5 11.5h17a8.5 8.5 0 0 1-17 0z"/><path d="M8 8.5c0-1.5 1.5-1.5 1.5-3M12 8.5c0-1.5 1.5-1.5 1.5-3M16 8.5c0-1.5 1.5-1.5 1.5-3"/>',
+  smile:'<path d="M5 4.5h14A1.5 1.5 0 0 1 20.5 6v9L14 20.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5z"/><path d="M20.5 15H15.5a1.5 1.5 0 0 0-1.5 1.5v4M8.5 13c1.8 1.6 4.2 1.6 6 0"/><circle cx="9" cy="9.5" r=".7" fill="#fff"/><circle cx="15" cy="9.5" r=".7" fill="#fff"/>',
+  cash:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 10v4M18 10v4"/>',
+  pin:'<path d="M12 21.5s7-6.2 7-11.3a7 7 0 1 0-14 0c0 5.1 7 11.3 7 11.3z"/><circle cx="12" cy="10" r="2.6"/>',
+  tag:'<path d="M12.5 2.8H20a1.2 1.2 0 0 1 1.2 1.2v7.5a2 2 0 0 1-.6 1.4l-7.4 7.4a1.8 1.8 0 0 1-2.6 0l-6.3-6.3a1.8 1.8 0 0 1 0-2.6l7.4-7.4a2 2 0 0 1 1.4-.6z"/><circle cx="16.8" cy="7.2" r="1.5"/>'
+};
+function svg(g){return '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+GLYPH[g]+'</svg>';}
+
+const APPS = [
+{ id:"wechat", name:"WeChat", country:"China", flag:"🇨🇳", region:"Asia", type:"Super-app", glyph:"chat", c:["#63e6be","#0ca678"], badge:true,
+  tagline:"The template every other entry is chasing.",
+  founded:"January 2011, Guangzhou (Tencent)",
+  reach:"More than 1.4 billion monthly users, Weixin and WeChat combined (Q1 2026)",
+  bench:"The one exception to our “unheard of abroad” rule. It's here as the model that Gojek, Grab, Kaspi and Careem all openly chased.",
+  lingo:["加个微信","“Add me on WeChat,” the standard way to swap contacts"],
+  does:["Messaging & Moments","WeChat Pay","Mini Programs","Red packets","Bills & public services","Official accounts"],
+  doFirst:"Swap QR codes instead of phone numbers. In China, scanning someone's WeChat code has largely replaced the business card.",
+  story:"Tencent released Weixin (“micro-message”) in January 2011 as a plain messenger, built by a small team under engineer Allen Zhang; the international version was named WeChat in 2012 and combined users passed a billion in 2018. The payments breakthrough came during Lunar New Year 2014, when WeChat digitized hongbao, the red envelopes of cash exchanged at the holiday, and millions linked bank cards to join in. Mini Programs, apps that run inside the app, followed in 2017.",
+  meaning:"It is less an app than the operating system of Chinese daily life: chat, payment, identity, news and shopping in one place. More than 4.3 million Mini Programs run inside it, and WeChat Pay is accepted from street stalls to hospitals. Tencent has tried repeatedly to take WeChat global and has largely failed; outside China it is mostly the diaspora's line home.",
+  fine:"Accounts registered to mainland Chinese phone numbers are censored without notice, with keyword lists updated around current events. In 2020 the University of Toronto's Citizen Lab reported that images and documents sent only between accounts registered outside China were also scanned, and that files flagged as politically sensitive were then blocked for China-registered users, effectively using foreign users to train domestic censorship. Tencent said content shared among international users is private.",
+  sources:[["Tencent: Weixin & WeChat (1.4B+ MAU, Q1 2026)","https://www.tencent.net.cn/products/weixin-wechat/"],["Marketing to China: WeChat statistics 2026","https://marketingtochina.com/wechat-statistics/"],["Business of Apps: WeChat statistics","https://www.businessofapps.com/data/wechat-statistics/"],["Citizen Lab: We Chat, They Watch","https://citizenlab.ca/research/we-chat-they-watch/"],["CNBC: Tencent response to Citizen Lab","https://www.cnbc.com/2020/05/08/tencent-wechat-surveillance-help-censorship-in-china.html"]]
+},
+{ id:"gojek", name:"Gojek", country:"Indonesia", flag:"🇮🇩", region:"Asia", type:"Super-app", glyph:"moto", c:["#51cf66","#2b8a3e"],
+  tagline:"It started as a phone line for motorbike taxis.",
+  founded:"2010, Jakarta; app launched 2015",
+  reach:"2 million+ registered drivers at the 2021 GoTo merger; GoTo claimed ~2% of Indonesia's GDP",
+  lingo:["ojol","ojek online: the app-booked motorbike driver, now a social class of its own"],
+  does:["GoRide & GoCar","GoFood","GoSend parcels","GoMart","GoPay wallet"],
+  doFirst:"Book a GoRide. A driver in a green jacket hands you a helmet, and you ride pillion through Jakarta traffic faster than any car.",
+  story:"Nadiem Makarim co-founded Gojek in 2010 as a call centre dispatching ojek, the motorbike taxis whose drivers traditionally waited on street corners and haggled over fares. The app arrived in 2015 and quickly added food, couriers and the GoPay wallet. In 2021 Gojek merged with e-commerce rival Tokopedia to form GoTo, which said the combined ecosystem had more than 100 million monthly users and accounted for about 2% of Indonesia's GDP. Makarim had left in 2019 to become education minister.",
+  meaning:"Green-jacketed ojol drivers are among the most visible workforces in Indonesia, clustered at roadside waiting spots between orders. For millions of households the app is how lunch arrives and parcels move, and for anyone with a motorbike it is a way to earn cash the same day. That scale makes drivers a political constituency: government officials weigh their fees and bonuses in any big decision about the platforms.",
+  fine:"Drivers are classed as “partners,” not employees, and fights over commissions recur. On 28 August 2025, Affan Kurniawan, a 21-year-old Gojek driver delivering a food order near parliament in Jakarta, was run over and killed by a police armoured vehicle during protests; his death turned local unrest into a nationwide uprising, and the officer responsible was dishonourably discharged. Grab has spent years trying to buy GoTo. Drivers protested a merger in 2025 over monopoly fears, talks snagged in January 2026 over a state-linked shareholder's stake, and we found no completed deal as of this guide's date.",
+  sources:[["TechCrunch: Gojek and Tokopedia merge to form GoTo","https://techcrunch.com/2021/05/16/gojek-and-tokopedia-merge-to-form-goto-group"],["Jakarta Globe: family demands justice for Affan Kurniawan","https://jakartaglobe.id/news/victims-family-demands-justice-after-gojek-driver-fatally-hit-by-police-vehicle-during-rally"],["Wikipedia: August 2025 Indonesian protests","https://en.wikipedia.org/wiki/August_2025_Indonesian_protests"],["Reuters via Yahoo: Grab–GoTo talks face regulatory hurdles","https://finance.yahoo.com/news/grab-goto-merger-talks-face-080425981.html"],["Bloomberg: Grab–GoTo deal hits snag (Jan 2026)","https://www.bloomberg.com/news/articles/2026-01-23/grab-goto-deal-hits-snag-caused-by-state-backed-holder-s-stake"]]
+},
+{ id:"grab", name:"Grab", country:"Malaysia", flag:"🇲🇾", region:"Asia", type:"Super-app", glyph:"car", c:["#4dabf7","#1864ab"],
+  tagline:"A plan for safer Malaysian taxis that ate a region.",
+  founded:"June 2012, Kuala Lumpur (as MyTeksi)",
+  reach:"8 Southeast Asian countries; headquartered in Singapore; Nasdaq-listed",
+  does:["GrabCar & GrabBike","GrabFood & GrabMart","GrabExpress","GrabPay","Loans & insurance"],
+  doFirst:"From the airport, book a GrabCar. By dinner you'll be using the same account to order food and pay at a hawker stall.",
+  story:"Anthony Tan and Tan Hooi Ling launched MyTeksi in Kuala Lumpur in June 2012, pitched as a safer, more reliable way to hail an ordinary taxi. It became GrabTaxi in 2013 and simply Grab in 2016 as it moved into private cars, motorbikes and food. In 2018 it absorbed Uber's Southeast Asian business, with Uber taking a stake of about 27.5%, and it went on to list on Nasdaq. Its headquarters moved to Singapore, but it was born in Malaysia, which is why it's filed here.",
+  meaning:"Across the region Grab is the default for visitors and locals alike: the airport ride, the office lunch, the wallet at the food court. Few brands are shared so widely across Southeast Asia's very different countries, and the green-jacketed driver is a fixture from Kuala Lumpur to Manila.",
+  fine:"In a closely watched case, Malaysian courts held that a Grab driver on a contract for services, Loh Guet Ching, was not a “workman” entitled to bring an unfair-dismissal claim. Partly in response, Malaysia passed the Gig Workers Act 2025, in force since 31 March 2026, which recognises gig contracts and requires social-security coverage for more than 1.6 million workers. Next door, the Grab–GoTo deal would give the combined company an estimated 91% of Indonesian ride-hailing, by one legal analyst's count.",
+  sources:[["Wikipedia: Grab Holdings","https://en.wikipedia.org/wiki/Grab_Holdings"],["Lexology: The Gig Workers Bill 2025 and the Grab case","https://www.lexology.com/library/detail.aspx?g=1a89fadd-8a9f-4655-888f-b5d5af044e9e"],["Business & Human Rights Centre: Gig Workers Act in force","https://www.business-humanrights.org/en/latest-news/malaysia-gig-workers-act-enters-into-force-extending-legal-protections-to-over-16-million-workers/"],["ISEAS Fulcrum: Is the new law a good deal?","https://fulcrum.sg/gig-workers-in-malaysia-is-the-new-law-a-good-deal/"],["Jakarta Globe: what a Grab–GoTo merger means","https://jakartaglobe.id/business/what-a-grabgoto-merger-means-for-ridehailing-in-indonesia"]]
+},
+{ id:"rappi", name:"Rappi", country:"Colombia", flag:"🇨🇴", region:"Americas", type:"Super-app", glyph:"bag", c:["#ff8787","#e8590c"],
+  tagline:"Three founders, a Bogotá street corner and free doughnuts.",
+  founded:"2015, Bogotá",
+  reach:"9 Latin American countries; ~350,000 couriers (2024)",
+  lingo:["rappitenderos","the couriers with the orange backpacks"],
+  does:["Restaurants","Rappi Turbo ~10-min delivery","Groceries & pharmacy","Courier errands","RappiPay & RappiCard","Travel"],
+  doFirst:"Try Rappi Turbo, which promises groceries or a meal in about ten minutes in covered neighbourhoods.",
+  story:"Simón Borrero, Sebastián Mejía and Felipe Villamarín had built Grability, online-shopping software for retailers, before launching Rappi in Bogotá in 2015. To get their first users they handed out free doughnuts to anyone who downloaded the app, which at first covered a radius of about five blocks. An early “Antojo” (craving) button let people order practically anything, and early users asked couriers to fetch pet food and even run ATM errands. Rappi joined Y Combinator's Winter 2016 batch, became Colombia's first unicorn in 2018 and took $1 billion from SoftBank in 2019.",
+  meaning:"For urban Latin Americans, Rappi is where the super-app idea first became tangible: food, pharmacy, groceries, a credit card and a courier for errands, all behind one orange icon. Its founders became symbols of a regional tech scene that, when they started, had only two unicorns.",
+  fine:"Many of Rappi's couriers in Colombia are Venezuelan migrants, and low pay and precarious conditions have prompted strikes and a government probe. Regulation is arriving market by market: after Mexico's 2025 digital-platform labour reform, Rappi said about 30% of its Mexican couriers would receive mandatory profit-sharing payments for the first time in 2026. Colombia and Brazil are debating whether couriers should be employees, which would raise the cost of the whole model.",
+  sources:[["Wikipedia: Rappi","https://en.wikipedia.org/wiki/Rappi"],["Rest of World: Simón Borrero profile","https://restofworld.org/profile/simon-borrero/"],["LAVCA: interview with Simón Borrero (2016)","https://www.lavca.org/feature/entrepreneur-profile-simon-borrero-co-founder-ceo-rappi/"],["Context (Thomson Reuters Foundation): Venezuelan migrant couriers","https://www.context.news/digital-rights/colombias-rappi-app-draws-ire-of-venezuelan-migrant-couriers"],["Mexico Business News: profit sharing for 30% of couriers","https://mexicobusiness.news/ecommerce/news/rappi-pay-profit-sharing-30-mexico-couriers"],["Yahoo Finance: Rappi profile and labour risk","https://finance.yahoo.com/quote/RAPP.PVT/profile/"]]
+},
+{ id:"careem", name:"Careem", country:"United Arab Emirates", flag:"🇦🇪", region:"Middle East", type:"Super-app", glyph:"pin", c:["#38d9a9","#087f5b"],
+  tagline:"Two consultants, a booking website and a phone for dispatch.",
+  founded:"2012, Dubai",
+  reach:"80+ cities; rides in the UAE, Saudi Arabia, Jordan, Egypt, Iraq, Kuwait, Morocco and Bahrain",
+  lingo:["Captains","Careem's name for its drivers and riders"],
+  does:["Rides","Food","Quik groceries","Careem Pay & remittances","Bike rental","Careem Plus"],
+  doFirst:"Send money home. Transfers to India and Pakistan through Careem Pay are one of the app's core uses.",
+  story:"Former McKinsey consultants Mudassir Sheikha and Magnus Olsson each put about $50,000 into Careem in 2012. It began as a website booking corporate cars, with drivers arranged by phone. It spread from Morocco to Pakistan, and Uber agreed to buy it for $3.1 billion in 2019, one of the Middle East's landmark tech exits. In 2023 the company split: Uber kept rides, while e&, the Abu Dhabi telecoms group formerly called Etisalat, paid $400 million for 50.03% of the super-app. Under UAE law a government entity must hold at least 51% of e&, and the state's 60% stake sits with the Emirates Investment Authority. In mid-2026 e& agreed to sell part of that stake back to Uber.",
+  meaning:"In a region where most residents in several countries are expatriates, Careem is both a way around the city and a pipe home. Its own 2025 recap boasted of a seven-second transfer to India and one customer who sent $620,000 to Pakistan in a year. Its founding pitch was simple: help professionals cross a booming Dubai that didn't trust its taxis.",
+  fine:"The delivery side of the Gulf's app economy runs on riders working through summers that regularly pass 45°C. Careem's own Rahma Pledge, which hands water and food to delivery workers, is a telling sign of the conditions. Ownership is unusual too: rides belong to a US company, while the super-app is controlled by a group the Emirati state majority-owns.",
+  sources:[["CNBC: Careem spinout with $400M from e& (2023)","https://www.cnbc.com/2023/04/10/uber-owned-careem-launches-spinout-with-400-million-investment-from-uaes-e.html"],["CNBC: founders put in $100,000 (2026)","https://www.cnbc.com/video/2026/08/13/careem-founder-mudassir-sheikha.html"],["Arabian Post: e& sells part of stake to Uber (2026)","https://thearabianpost.com/uber-deepens-careem-push-through-e-deal/"],["Economy Middle East: Careem's 2025 recap","https://economymiddleeast.com/news/careem-everything-app-expansion-drives-record-2025-growth-across-new-uae-cities/"],["Careem: the everything app (Rahma Pledge)","https://www.careem.com/"],["APKPure listing: ride markets","https://apkpure.com/careem/com.careem.acma"]]
+},
+{ id:"yandex", name:"Yandex Go", country:"Russia", flag:"🇷🇺", region:"Europe", type:"Super-app", glyph:"car", c:["#ffd43b","#f08c00"], badge:true,
+  tagline:"The app Uber left behind.",
+  founded:"2011, Moscow (as Yandex.Taxi); relaunched as Yandex Go in 2020",
+  reach:"Dominant in Russia and much of the former USSR; 86% of Uzbek ride-hailing in 2023",
+  caveat:"Russia is an authoritarian state that has waged a full-scale war against Ukraine since February 2022. Independent media are blocked or branded “foreign agents,” elections are not free, and security services have broad legal access to private data. Yandex Go operates inside that system, and so does everything below.",
+  does:["Taxi","Yandex Eats","Lavka groceries","Couriers & cargo","Scooters","Transit times"],
+  doFirst:"If you're a visitor, choose “cash” when you book. Foreign Visa and Mastercard cards no longer work in Russia, and sign-up codes often won't reach foreign numbers.",
+  story:"Yandex, the search company often called Russia's Google, launched Yandex.Taxi in Moscow in 2011. In 2017 Uber merged its ride-hailing business in Russia and neighbouring countries into a joint venture with Yandex.Taxi, effectively handing over the market. In 2020 the taxi app became Yandex Go, absorbing food delivery, groceries, couriers, car-sharing and public-transport schedules. In 2024 the Dutch-registered parent sold its Russian business to a consortium of Russian investors.",
+  meaning:"With Western rivals gone, it is the practical default for getting around Russian cities, and its bright-yellow rental scooters are a summer fixture from Moscow to Yekaterinburg. The model was exported as Yango to other ex-Soviet states and beyond.",
+  fine:"Since 1 September 2023, Russian rules have required taxi services to give the FSB security service round-the-clock access to their order data. Meduza reported that data from Yango trips abroad was stored in Russian data centres; Finland and Norway ordered the company to stop transferring their users' data to Russia, and the Dutch data-protection authority opened an investigation. Yandex said foreign trip data is available only to authorities in the country where the trip took place.",
+  sources:[["Meduza: Yandex set to share Yango data with the FSB","https://meduza.io/en/feature/2023/08/08/user-x-with-driver-y-traveled-from-point-a-to-point-b"],["The Record: regulators fear Russian access to Yandex taxi data","https://therecord.media/regulators-fear-yandex-data-transfers"],["The Moscow Times / Bloomberg: Dutch probe of Yango","https://www.themoscowtimes.com/2023/10/12/netherlands-probes-yandex-taxi-app-over-fears-of-fsb-data-sharing-bloomberg-a82751"],["Wikipedia: Yandex Taxi (Uzbekistan share)","https://en.wikipedia.org/wiki/Yandex_Taxi"],["Moscow Pass: using Yandex Go with a foreign card","https://moscowpass.com/en/blog/yandex-go-formerly-yandex-taxi-the-ride-hailing-app-guide"]]
+},
+{ id:"snapp", name:"Snapp", country:"Iran", flag:"🇮🇷", region:"Middle East", type:"Super-app", glyph:"tag", c:["#74c0fc","#3b5bdb"], badge:true,
+  tagline:"It put a price on a Tehran taxi before you got in.",
+  founded:"2014, Tehran (launched as Taxi Yaab)",
+  reach:"Claims 60M+ users, ~20 services and 287 cities; a record of 4M+ rides in a day",
+  caveat:"The Islamic Republic of Iran is an authoritarian theocracy. Women are legally required to wear the hijab in public, protests have been met with lethal force, and the state has repeatedly cut its population off from the global internet. US sanctions shape which apps and payment systems can exist at all.",
+  does:["Rides","Snapp Rose (women & families)","Parcels","Food & groceries","Travel","Instalment shopping"],
+  doFirst:"There's no quick way in for visitors: you need an Iranian SIM to register, and foreign bank cards don't work under sanctions.",
+  story:"Snapp launched in Tehran in 2014 with a simple promise: the fare was quoted before pickup, ending the ritual of haggling with drivers. It passed a million daily rides by 2017 and grew into a super-app of about 20 services, from food to hotel bookings. Because of US sanctions it has been pulled from Apple's App Store and Google Play, so Iranians install it from the local store Cafe Bazaar or the company's website.",
+  meaning:"Fixed prices changed street life for millions of riders, and driving for Snapp has become a common second job in an economy battered by sanctions and inflation. Snapp Rose offers rides for women and families. Its reach is such that when the internet goes dark, Snapp's fate becomes a proxy for the whole domestic economy.",
+  fine:"The app sits on the frontline of hijab enforcement. In 2019 the judiciary praised a driver who ejected a woman over her headscarf, and police said drivers are legally responsible for passengers' dress; in 2023 authorities said they had confiscated 2,000 cars in which women were seen unveiled, and many drivers refuse unveiled passengers for fear of losing theirs. When the regime shut down the internet on 8 January 2026 amid protests and a deadly crackdown, Snapp kept running on the domestic National Information Network but said requests fell 80%. Access was cut again after US and Israeli strikes on 28 February and only returned, heavily restricted, in late May.",
+  sources:[["YesPress: how Snapp built Iran's everyday operating system","https://yespress.io/snapp"],["RFE/RL: Snapp at centre of ‘bad hijab’ dispute (2019)","https://www.rferl.org/a/snapp-judgment-iran-ride-sharing-company-at-center-of-bad-hijab-dispute/30000859.html"],["Stimson Center: Iran's high-tech war on women","https://www.stimson.org/2025/resisting-irans-high-tech-war-on-women-mahsa-amini/"],["The National: shutdown's toll, incl. Snapp statement","https://www.thenationalnews.com/news/mena/2026/01/26/view-from-tehran-internet-shutdown-deepens-economic-pain-as-uncertainty-drags-on/"],["Human Rights Watch: Iran internet shutdown (2026)","https://www.hrw.org/news/2026/03/06/iran-internet-shutdown-violates-rights-escalates-risks-to-civilians"],["NPR: Iranians back online after months-long shutdown","https://www.npr.org/2026/05/28/g-s1-124610/iranians-back-online"],["Hipersia: app-store removal and Cafe Bazaar","https://www.hipersia.com/en/post/456"]]
+},
+{ id:"kaspi", name:"Kaspi.kz", country:"Kazakhstan", flag:"🇰🇿", region:"Asia", type:"Super-app", glyph:"cart", c:["#ff6b6b","#c92a2a"],
+  tagline:"A bank that turned into a country's home screen.",
+  founded:"Bank founded 1991, Almaty; Kaspi Bank from 2002",
+  reach:"~14.7M consumers in a country of ~20M; ~0.7M merchants",
+  does:["Payments to 15,000+ services","Kaspi QR","Marketplace & parcel lockers","Instalments & loans","Travel","Taxes, fines & benefits"],
+  doFirst:"Pay by scanning a Kaspi QR at almost any till, and notice the app doesn't come in English. The company has said it has no plans to add it.",
+  story:"Kaspi began as Bank Kaspiyskiy in 1991 and was rebranded Kaspi Bank in 2002. Under chief executive Mikheil Lomtadze it rebuilt itself around a single app combining payments, an Amazon-style marketplace and consumer finance, running on its own payments network. It listed in London in 2020 and on Nasdaq in 2024, and has since bought into Turkish e-commerce, including Hepsiburada, its first big bet outside Central Asia.",
+  meaning:"In a country five times the size of France with 20 million people, Kaspi is shop, bank, post box and government counter. Investors call it “Kazakhstan's Tencent”: users pay taxes and traffic fines, receive social benefits and collect parcels from Kaspi lockers. Kaspi Maps even shows the live queue, in minutes, at its branches.",
+  fine:"When January 2022's protests over fuel prices became “Bloody January,” the government imposed rolling internet blackouts for about a week, costing an estimated $410 million; more than 200 people were killed. In a population that had largely given up cash, cards and apps went dark and ATM queues formed. More recently, 16% interest rates and a crackdown on imported smartphones have hit Kaspi's lending and sales.",
+  sources:[["CM Capital Research: Kaspi.kz (users, headwinds)","https://cmcapitalresearch.substack.com/p/kaspikz-kspi"],["Banking Frontiers: Not just a bank, but a super app","https://bankingfrontiers.com/not-just-a-bank-but-a-super-app/"],["Kaspi investor relations: the super app","https://ir.kaspi.kz/about/mobile-app/"],["App Store: Kaspi developer response on English","https://apps.apple.com/us/app/kaspi-kz-%D1%81%D1%83%D0%BF%D0%B5%D1%80%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5/id1195076505"],["The Diplomat: internet shutdown pushback in Kazakhstan","https://thediplomat.com/2023/08/internet-shutdown-pushback-in-kazakhstan/"],["Eurasianet: fintech revolution vs. the blackout","https://eurasianet.org/kazakhstan-fintech-revolution-runs-up-against-taxmans-demands"],["Invest Research: Kaspi and Hepsiburada","https://investresearch.substack.com/p/investing-in-kazakhstans-super-app"]]
+},
+{ id:"mpesa", name:"M-Pesa", country:"Kenya", flag:"🇰🇪", region:"Africa", type:"Wallet", glyph:"send", c:["#8ce99a","#2f9e44"],
+  tagline:"“Send Money Home,” on phones that could do little else.",
+  founded:"6 March 2007 (Safaricom and Vodafone)",
+  reach:"40M monthly active customers in Kenya (March 2026)",
+  lingo:["Lipa na M-Pesa","“Pay with M-Pesa,” on signs across Kenya"],
+  does:["Send money","Paybill & Till","Cash agents","Fuliza overdraft","M-Shwari savings","*334# on any phone"],
+  doFirst:"Pay a street vendor by entering their Till number. No smartphone needed: dial *334# on any handset.",
+  story:"Safaricom and Vodafone launched M-Pesa (pesa is Swahili for money) on 6 March 2007 with the slogan “Send Money Home,” so city workers could send wages to families upcountry. It ran on basic SMS and USSD menus and a network of airtime resellers turned cash agents. The business plan projected 350,000 customers in year one; it signed up 1.2 million. It has since spread to other African markets including Tanzania, DR Congo, Ghana, Egypt and Ethiopia.",
+  meaning:"Before M-Pesa, about 19% of Kenyan adults had access to formal financial services; by 2024 the figure was 84.8%. Rent, school fees, wedding contributions and bus fares all move through it. A 2016 study in Science estimated that access to M-Pesa had lifted about 2% of Kenyan households out of extreme poverty, with the biggest gains for households headed by women.",
+  fine:"Borrowing is now a growth engine. Kenyans took about Sh1.46 trillion in Fuliza overdrafts in the year to March 2026, up roughly 49%, often in tiny amounts for food, rent and fares; unpaid balances accrue daily fees and can lead to credit blacklisting. Dependence also makes glitches national news: in April 2026 a forced migration to a new “My OneApp” left some customers unable to log in to critical money services.",
+  sources:[["Safaricom: M-Pesa hits 40 million customers (2026)","https://www.safaricom.co.ke/media-center-landing/press-releases/m-pesa-hits-40-million-customers-milestone-as-it-turns-nineteen"],["Moses Kemibaro: My OneApp analysis and history","https://moseskemibaro.com/2026/04/07/safaricoms-m-pesa-my-oneapp-has-arrived-a-brilliant-strategy-undermined-by-a-poor-execution/"],["Suri & Jack, Science (2016)","https://www.science.org/doi/10.1126/science.aah5309"],["Nation: Kenyans ‘Fuliza’ Sh1.4 trillion","https://nation.africa/kenya/business/kenyans-fuliza-record-sh1-4-trillion-loans-for-food-rent-and-fees-5452126"],["Business Daily: hiccups after M-Pesa app overhaul","https://www.businessdailyafrica.com/bd/corporate/technology/some-subscribers-suffer-hiccups-after-m-pesa-app-overhaul-5423556"],["Safaricom: M-Pesa journey","https://www.safaricom.co.ke/main-mpesa/about-m-pesa/m-pesa-journey"]]
+},
+{ id:"bkash", name:"bKash", country:"Bangladesh", flag:"🇧🇩", region:"Asia", type:"Wallet", glyph:"cash", c:["#f783ac","#c2255c"],
+  tagline:"A bank for people banks never wanted.",
+  founded:"2011, Dhaka (affiliate of BRAC Bank)",
+  reach:"83M+ customers (April 2026); 47M+ active in the past 90 days",
+  lingo:["Human ATMs","the nickname for its 330,000-plus cash agents"],
+  does:["Send money","Cash in & out","Mobile recharge","Bills & fees","Remittances","Merchant QR"],
+  doFirst:"Dial *247# on any handset to send money. The app is optional; the phone number is the account.",
+  story:"Kamal Quadir founded bKash in 2011 as a BRAC Bank affiliate, linked to BRAC, the development organisation. Accounts are tied to a mobile number, work on basic handsets through USSD menus and are topped up at corner shops. Investors came to include Alipay's parent and SoftBank's Vision Fund, and in November 2021 bKash became Bangladesh's first startup valued at $1 billion.",
+  meaning:"In a country where millions of workers send wages home from Dhaka's garment belt or the Gulf, bKash is how money reaches villages, and its agents are trusted fixtures of their neighbourhoods. It processes a majority of Bangladesh's mobile-money transactions, and nearly a million merchants accept bKash QR payments, from grocery stalls to brand outlets.",
+  fine:"The state can switch it off. During the July 2024 uprising, Sheikh Hasina's government imposed a nationwide internet blackout from 18 July; online banking and mobile financial services collapsed, and remittance collection halted for about five days, before a second shutdown in August and the government's fall on 5 August. For a service that carries the country's remittance lifeline, connectivity is a political question.",
+  sources:[["bKash: about (83M customers, April 2026)","https://www.bkash.com/en/about"],["Bonik Barta: how bKash became a Tk 160bn enterprise","https://en.bonikbarta.com/business/dt2VlJjSIXS99Mic"],["bKash: 12 years and ‘Human ATMs’","https://www.bkash.com/en/blog/bkash-anniversary-12years"],["nsave: bKash explained","https://www.nsave.com/bangladesh/bkash"],["Wikipedia: 2024 Bangladesh internet blackouts","https://en.wikipedia.org/wiki/2024_Bangladesh_internet_blackouts"],["The Daily Star: remittance collection disrupted","https://www.thedailystar.net/business/economy/news/remittance-collection-disrupted-3662336"],["New Age: online banking, MFS collapse","https://www.newagebd.net/post/country/240578/online-banking-mfs-collapse-amid-internet-shutdown"]]
+},
+{ id:"gcash", name:"GCash", country:"Philippines", flag:"🇵🇭", region:"Asia", type:"Wallet", glyph:"wallet", c:["#748ffc","#364fc7"],
+  tagline:"Born as a text message, about to be the country's biggest IPO.",
+  founded:"October 2004 (Globe Telecom); smartphone app 2012",
+  reach:"41.5M monthly active users, ~56% of Filipino adults (June 2026); 90M+ registered",
+  does:["Send & receive","Bills & mobile load","QR payments","Savings & investing","GStocks","Loans & insurance"],
+  doFirst:"Pay by QR at a sari-sari store, the neighbourhood corner shops where GCash began as a place to turn cash into e-money.",
+  story:"Globe Telecom launched GCash in October 2004 as an SMS-based money-transfer service; users converted cash to e-money at outlets including sari-sari stores for a ₱1 fee. The app arrived in 2012. Its operator, Mynt, is owned by Globe, Ant Group, an Ayala–Mitsubishi venture and MUFG. The IPO, cleared by regulators, is scheduled for 6–12 October 2026, with listing on 20 October under the ticker GCASH. At up to ₱92.3 billion it would be the largest in Philippine history.",
+  meaning:"In a country with millions of overseas workers and many unbanked adults, GCash is where remittances land, bills get paid and small debts are settled between friends. The IPO plan reportedly offers an allocation to users through its in-app broker, turning customers into would-be shareholders.",
+  fine:"GCash is an e-money issuer, not a bank, so balances are not covered by the Philippine deposit-insurance scheme. It has had scares: in May 2023 hundreds of users reported unauthorised transfers, which the privacy commission traced to phishing, and in November 2024 unexplained deductions were blamed on an internal software glitch. Growth has also cooled, with adjusted revenue up 9.8% in the first half of 2026.",
+  sources:[["Wikipedia: GCash","https://en.wikipedia.org/wiki/GCash"],["Philstar: GCash IPO gets SEC green light","https://www.philstar.com/business/2026/09/11/2555577/gcash-ipo-gets-sec-green-light"],["Rappler: record IPO a payday for early backers","https://www.rappler.com/newsbreak/inside-track/gcash-private-equity-initial-public-offering-ultimate-payday/"],["Inquirer: GStocks users get first dibs","https://business.inquirer.net/599526/biz-buzz-gstocks-users-get-first-dibs-on-gcash-ipo"],["GMA: BSP investigates unauthorized transactions (2023)","https://www.gmanetwork.com/news/money/companies/869542/bsp-investigating-reported-unauthorized-gcash-transactions/story/"],["Inquirer: 2024 deductions an internal glitch","https://newsinfo.inquirer.net/2007171/gcash-unauthorized-deduction-internal-glitch-and-not-by-hackers"]]
+},
+{ id:"zalo", name:"Zalo", country:"Vietnam", flag:"🇻🇳", region:"Asia", type:"Messenger", glyph:"chat", c:["#66d9e8","#1098ad"],
+  tagline:"The local messenger that beat Facebook at home.",
+  founded:"2012, by VNG",
+  reach:"81.3M monthly users and 2.2B messages a day (June 2026)",
+  lingo:["Zalo","Zing (VNG's portal) + “Alô,” the Vietnamese phone greeting"],
+  does:["Chat & calls","Groups","Official accounts","Payments","Mini apps","AI features"],
+  doFirst:"Follow your local ward or utility's Official Account. That's how much of Vietnam's public administration now sends notices.",
+  story:"VNG, the company behind the Zing web portal, launched Zalo in 2012, after WhatsApp and Viber were already available. Where the global giants barely marketed in Vietnam, VNG spent heavily and built a Vietnamese-first interface; Zalo reached 2 million users within about a year. Payments and a mini-app platform followed.",
+  meaning:"In a March 2026 survey Zalo was the most-opened app in Vietnam, used by 98% of respondents, ahead of Facebook's 91%. Families, schools, offices and landlords run on Zalo groups, and by the end of 2024 there were more than 17,000 official accounts for government agencies and utilities, putting the state in the same chat list as your aunt.",
+  fine:"In late December 2025, days before Vietnam's new Personal Data Protection Law took effect, Zalo told users to accept expanded data collection, including citizen-ID numbers, location and interaction content, or have their accounts deleted after 45 days, with no option to consent in part. The backlash was loud enough that Vietnam's competition watchdog summoned VNG for talks. In a one-party state, an app this close to public administration is also this close to the government.",
+  sources:[["Vietnam.vn: Zalo reaches 81.3 million users","https://www.vietnam.vn/en/zalo-dat-81-3-trieu-nguoi-dung-voi-2-2-ty-tin-nhan-moi-ngay"],["Bao Nghe An: Zalo 98% usage (Q&Me 2026)","https://baonghean.vn/en/zalo-thong-tri-thi-truong-ung-dung-di-dong-viet-nam-nam-2026-voi-ty-le-su-dung-cham-muc-98-10329834.html"],["Prodima: what is Zalo","https://prodima.vn/en/what-is-zalo/"],["Tuoi Tre: Zalo terms spark backlash","https://news.tuoitre.vn/zalo-updates-terms-to-expand-personal-data-collection-sparks-backlash-in-vietnam-103251229133905443.htm"],["VnExpress: competition authority summons VNG","https://e.vnexpress.net/news/tech/enterprises/vietnam-competition-authority-summons-operator-vng-over-messaging-app-zalo-s-controversial-user-terms-4999853.html"]]
+},
+{ id:"kakao", name:"KakaoTalk", country:"South Korea", flag:"🇰🇷", region:"Asia", type:"Messenger", glyph:"chat", c:["#ffe066","#f59f00"],
+  tagline:"The messenger a country couldn't do without for 11 hours.",
+  founded:"2010, by Kakao (founder Kim Beom-su)",
+  reach:"~48M monthly users (October 2025) in a country of ~51M",
+  does:["Chat","Kakao T taxis","KakaoPay","Gift shop","Maps","One login for everything"],
+  doFirst:"Send a friend a coffee voucher from the gift tab, a very Korean way to say thanks.",
+  story:"Kim Beom-su, who had earlier co-founded the Hangame games portal, launched KakaoTalk in 2010 as smartphones took off in Korea. Free messaging made per-text charges feel obsolete almost overnight, and Kakao built outward: taxis (Kakao T), a wallet (KakaoPay), a bank, maps, music and a gift shop. Most Kakao services use a KakaoTalk ID as their login.",
+  meaning:"It is described in Korea as practically national communications infrastructure: school notices, work chats, wedding invitations and gifts all flow through it. When Kakao redesigned the app in September 2025 into an Instagram-style feed, users revolted, its Google Play rating fell to 2.8 stars, and parents complained they couldn't ban short videos because school group chats live inside KakaoTalk. Kakao promised to bring back the classic friends list.",
+  fine:"On 15 October 2022 a fire in a battery room at an SK C&C data centre in Pangyo, south of Seoul, knocked KakaoTalk, KakaoPay and Kakao T offline for more than 11 hours, the longest outage in the app's history; some services took days to fully recover. Rival Naver, with off-site backup, recovered within hours. President Yoon Suk Yeol ordered an investigation and called on the companies' chiefs to explain themselves.",
+  sources:[["The Korea Herald: fire at Kakao data centre (2022)","https://www.koreaherald.com/view.php?ud=20221015000108"],["The Korea Times: unprecedented disruption","https://www.koreatimes.co.kr/southkorea/society/20221016/fire-at-data-center-causes-unprecedented-massive-service-disruption"],["DCD: government to grill Kakao","https://www.datacenterdynamics.com/en/news/south-koreas-government-to-grill-kakao-after-data-center-fire-cripples-key-services/"],["Korea JoongAng Daily: update backlash (2025)","https://www.koreajoongangdaily.com/business/kakaotalk-updates-spark-user-backlash-over-interface-and-privacy/11927865"],["The Korea Herald: classic list returning; 47.97M MAU","https://www.koreaherald.com/article/10622331"]]
+},
+{ id:"line", name:"LINE", country:"Japan", flag:"🇯🇵", region:"Asia", type:"Messenger", glyph:"smile", c:["#b197fc","#6741d9"],
+  tagline:"Built in the aftermath of an earthquake.",
+  founded:"23 June 2011, Tokyo (NHN Japan, a Naver subsidiary)",
+  reach:"~100M monthly users in Japan (early 2026); No. 1 messenger in Thailand and Taiwan",
+  does:["Chat & calls","Stickers","Official accounts","News","LINE MAN (Thailand)","Payments via PayPay (Japan)"],
+  doFirst:"Buy a sticker pack. Stickers are LINE's signature language, and a serious business.",
+  story:"After the March 2011 Tōhoku earthquake and tsunami knocked out phone networks, NHN Japan, the Japanese arm of South Korea's Naver, built an internet-based messenger. It launched as LINE in June 2011 and reached 100 million downloads in 18 months. LINE later merged with Yahoo Japan's parent under a SoftBank–Naver joint venture; the operator is now LY Corporation.",
+  meaning:"In Japan, LINE is the layer everyone shares, from teenagers to people in their 50s, who are among its heaviest users. Shops, businesses and local governments reach people through official accounts. In Thailand, where more than 80% of people use it, LINE runs its own delivery and ride app, LINE MAN.",
+  fine:"A late-2023 cyberattack traced to Naver Cloud exposed data on about 510,000 LINE users. Japan's communications ministry issued administrative guidance twice in spring 2024, pushing LY Corp to end its IT reliance on Naver and review the Korean company's capital ties. Seoul warned Tokyo against “unfair” measures, turning a data breach into a diplomatic dispute over who controls Japan's national messenger.",
+  sources:[["Wikipedia: Line (software)","https://en.wikipedia.org/wiki/Line_(software)"],["Digital Marketing for Asia: why LINE is Japan's most popular app","https://www.digitalmarketingforasia.com/line-most-popular-app-in-japan/"],["LY Corporation: business outside Japan","https://www.lycorp.co.jp/en/company/global/"],["KED Global: LINE Yahoo to sever tech ties with Naver","https://www.kedglobal.com/business-politics/newsView/ked202406190005"],["The Register: Japan rejects LINE Yahoo security plan","https://www.theregister.com/2024/04/17/japan_rejects_line_yahoo_security_plan/"]]
+},
+{ id:"swish", name:"Swish", country:"Sweden", flag:"🇸🇪", region:"Europe", type:"Wallet", glyph:"bolt", c:["#ff8cc6","#d6336c"],
+  tagline:"Six rival banks agreed on one app.",
+  founded:"December 2012, by six Swedish banks with Bankgirot and the Riksbank",
+  reach:"~9M users, ~86% of Sweden; 1.1B payments in 2024",
+  lingo:["att swisha","“to Swish,” in the Swedish dictionary since 2021"],
+  does:["Pay a phone number","Shop QR","Online checkout","Split the bill","Charity & flea markets"],
+  doFirst:"Swish the kid at the flea market. Bake sales, church collections and second-hand sellers all expect it.",
+  story:"Swish launched in December 2012 as a joint project of Danske Bank, Handelsbanken, Länsförsäkringar, Nordea, SEB and Swedbank, with the clearing house Bankgirot and the central bank. You send money to a phone number and it lands instantly, around the clock. Built for splitting bills between friends, it grew into a system for shop, online and bill payments; it had 700,000 users at the end of its first full year.",
+  meaning:"Sweden is one of the most cashless countries on earth, and Swish is part of the reason. In 2024 it handled 1.1 billion payments worth about SEK 560 billion, and Swedes sent more by value to each other than they spent in shops. YouGov ranked it the country's strongest brand in 2021.",
+  fine:"To get Swish you need BankID; for BankID you need a Swedish bank account; for that you need a personnummer, a national ID number that requires population registration. Newcomers and many foreign residents are locked out of a service everyone else assumes. Instant, irreversible payments also make it a magnet for fraud: fake payment screenshots, “new number” texts from supposed relatives and marketplace scams are routine warnings from Swedish banks and retailers.",
+  sources:[["Payments:Unpacked: Swish Swish (Part 1)","https://northeypoint.substack.com/p/swish-swish-part-1"],["Swish newsroom: eight million users","https://www.swish.nu/nyhetsrum/nyheter/historical-milestone-for-swish-now-more-than-8-million-users?lang=en"],["LikeSweden: Swish for newcomers","https://likesweden.com/swish-in-sweden-guide-newcomers/"],["Handelsbanken: Swish fraud","https://www.handelsbanken.se/sv/ekonomi-i-livet/privatekonomi/vardagshjalp/sakerhet-i-vardagen/swish-bedrageri-sa-skyddar-du-dig"],["Svensk Handel: Swish frauds rising","https://www.svenskhandel.se/sakerhet/sakerhetsnytt/swish-bedragerierna-okar/"]]
+},
+{ id:"twint", name:"Twint", country:"Switzerland", flag:"🇨🇭", region:"Europe", type:"Wallet", glyph:"qr", c:["#495057","#212529"],
+  tagline:"Once mocked, now a Swiss verb.",
+  founded:"2014 (PostFinance subsidiary); pre-launch August 2015 in Bern and Zurich",
+  reach:"6M+ users; 901M transactions in 2025",
+  lingo:["twinten","“to Twint,” now everyday Swiss speech"],
+  does:["Shop QR","Pay friends","Parking & transit","Online checkout","Loyalty cards","QR bills"],
+  doFirst:"Pay for parking by scanning the code on the meter. It's one of Twint's most popular uses after the checkout.",
+  story:"Twint was created by Monexio, a PostFinance subsidiary founded in 2014, and soft-launched in Bern and Zurich in August 2015. Other Swiss banks had backed a rival app, Paymit, which was later folded into Twint, making it the country's shared national solution. Early on it was widely dismissed; a Swiss newspaper later headlined it as the once-ridiculed app that won.",
+  meaning:"Twint is accepted in about 81% of Swiss shops and most online stores, and used for market stalls, trains, parking and paying friends back. A 2025 brand study named it Switzerland's strongest brand, and the company pitches it as “digital sovereignty,” a Swiss alternative to US and Chinese payment giants.",
+  fine:"Payments between people are free, but merchants typically pay about 1.3%, which retailers consider high; the Swiss Retail Federation filed a complaint with the Competition Commission alleging abuse of a dominant position.",
+  sources:[["Twint: 901 million transactions in 2025","https://www.twint.ch/en/company/media/twint-makes-switzerlands-payment-infrastructure-more-independent/"],["Twint: more than 6 million users","https://www.twint.ch/en/company/media/more-than-6-million-people-use-twint/"],["Wikipedia: TWINT","https://en.wikipedia.org/wiki/TWINT"],["swissinfo: six million use Twint","https://www.swissinfo.ch/eng/various/twint-has-more-than-six-million-users-by-the-middle-of-the-year/89856828"]]
+},
+{ id:"yape", name:"Yape", country:"Peru", flag:"🇵🇪", region:"Americas", type:"Wallet", glyph:"qr", c:["#da77f2","#862e9c"],
+  tagline:"A bank's app for people without a bank account.",
+  founded:"2016, Lima (Banco de Crédito del Perú)",
+  reach:"16.4M monthly active users (Q1 2026); ~72% of adults",
+  lingo:["yapear","to pay with Yape, as in “te yapeo”"],
+  does:["Pay a phone number","QR payments","Bills & recharges","Microloans","Marketplace","Dollar exchange"],
+  doFirst:"Pay a market vendor by scanning the Yape QR taped to the stall. Even the smallest sellers have one.",
+  story:"Banco de Crédito del Perú, the country's largest bank, launched Yape in 2016 as a simple transfer app for its own customers. It nearly failed three times, facing users attached to cash and resistance inside the bank. The breakthrough was letting people open an account with only a national ID card (DNI), no bank account needed, and courting tiny merchants with QR codes. Pandemic lockdowns did the rest.",
+  meaning:"One payments firm ranks Yape Peru's third most recognised brand, after WhatsApp and Facebook. Since the central bank forced interoperability in 2023, Yape and bank-consortium rival Plin together handle more than half of Peru's cashless transactions, and wallets account for about two-thirds of low-value payments. It has also expanded to Bolivia.",
+  fine:"Phones are now wallets, and phone theft is rampant: an average of 4,754 phones were stolen per day in 2023, and Peru toughened penalties to as much as 30 years in the most serious cases. Victims are told to call 1820 and say “Yape” to freeze their accounts, and in 2026 scammers were impersonating phone companies to plant wallet-draining malware. The smartphone-only design also leaves out people without reliable data coverage, especially in rural areas.",
+  sources:[["Wikipedia: Yape","https://en.wikipedia.org/wiki/Yape_(payment)"],["Credicorp: Yape reaches 16.4M MAU","https://grupocredicorp.com/yape-alcanzo-16-4-millones-de-usuarios-activos-mensuales-consolidando-su-cobertura-a-nivel-nacional/"],["EBANX: Yape and Peru's e-commerce","https://insights.ebanx.com/en/from-p2p-transfers-to-a-super-app-yape/"],["Spreedly: Peru's payments revolution","https://www.spreedly.com/blog/perus-payments-revolution-yape"],["Infobae: 4,000+ phones stolen daily (2023)","https://www.infobae.com/peru/2023/12/13/cuatro-mil-celulares-robados-al-dia-en-peru-como-proteger-mi-cuenta-bancaria-yape-y-plin-si-soy-victima/"],["Infobae: telecom impersonation scam (2026)","https://www.infobae.com/peru/2026/07/21/estafa-por-whatsapp-en-peru-delincuentes-se-hacen-pasar-por-empresas-telefonicas-para-vaciar-tus-cuentas-bancarias/"]]
+},
+{ id:"diia", name:"Diia", country:"Ukraine", flag:"🇺🇦", region:"Europe", type:"Government", glyph:"id", c:["#339af0","#1c3d8f"],
+  tagline:"The state in a smartphone, in wartime.",
+  founded:"2020, Kyiv (Ministry of Digital Transformation)",
+  reach:"23M+ users (late 2025), roughly every second resident",
+  lingo:["Diia","Ukrainian for “action”"],
+  does:["Digital passport & licence","150+ public services","Business registration","War bonds","Damage & repair claims","Diia.AI assistant"],
+  doFirst:"Open the digital ID. Ukraine was the first country to make digital passports the legal equal of paper ones.",
+  story:"Mykhailo Fedorov was 28 when he became Ukraine's first minister of digital transformation in 2019, promising a “state in a smartphone.” Diia launched in 2020, developed with support from USAID and EU partners. Registering as a sole trader now takes minutes. Since Russia's full-scale invasion, the app has added wartime functions: donating to the army, buying military bonds, reporting damaged homes and applying for repair compensation. Couples can even get married through it.",
+  meaning:"Diia turned a notoriously bureaucratic state into a service Ukrainians carry in their pocket, and it has become a point of national pride and a brand in its own right. Governments abroad study it as a model. For people forced from their homes by war, documents and benefits travel with the phone.",
+  fine:"Putting a wartime population's IDs, benefits and property claims in one app creates a single point of failure. Its politics have moved too: Fedorov became defence minister in January 2026 and was dismissed in July after clashing with senior generals over strategy and procurement; he has since called for wartime elections. The digital ministry that runs Diia has changed hands twice since.",
+  sources:[["Diia: project page (Ministry of Digital Transformation)","https://digitalstate.gov.ua/projects/govtech/diia"],["UkraineWorld: ‘State in a Smartphone’ as a benchmark","https://ukraineworld.org/en/articles/analysis/ukraines-state-smartphone"],["EU4Digital: Diia boasts 20 million users (USAID support)","https://eufordigital.eu/building-a-digital-state-ukraines-diia-app-now-boasts-over-20-million-users/"],["RBC-Ukraine: Fedorov confirmed as defence minister","https://newsukraine.rbc.ua/news/ukrainian-parliament-appoints-mykhailo-fedorov-1768396464.html"],["RTÉ: Who is Mykhailo Fedorov?","https://www.rte.ie/news/2026/0819/1588512-mykhailo-federov/"],["Wikipedia: Ministry of Digital Transformation","https://en.wikipedia.org/wiki/Ministry_of_Digital_Transformation_(Ukraine)"]]
+},
+{ id:"opay", name:"OPay", country:"Nigeria", flag:"🇳🇬", region:"Africa", type:"Wallet", glyph:"wallet", c:["#20c997","#0b7285"],
+  tagline:"From motorbike taxis to Nigeria's wallet.",
+  founded:"2018, Lagos (Opera bought PayCom, founded 2010)",
+  reach:"~50M registered users, ~10M daily (2026, reported); 500,000+ agents",
+  lingo:["okada","the motorbike taxis OPay started with; the word joined the Oxford English Dictionary in 2020"],
+  does:["Transfers","Airtime & bills","Cards","POS agents","Savings","Merchant payments"],
+  doFirst:"Pay a trader by transfer to their OPay account number. When bank apps glitch, this is where many Nigerians reroute their payments.",
+  story:"Opera, the Norwegian-founded browser company whose Opera Mini many Nigerians used on early phones, bought mobile-money operator PayCom in 2018 and relaunched it as OPay, alongside ORide motorbike hailing, food delivery and more. Then Lagos banned commercial motorbikes and tricycles across much of the city from 1 February 2020, citing thousands of accidents. ORide's mass-market visibility vanished, and OPay bet on payments.",
+  meaning:"OPay's moment came in early 2023, when a botched naira redesign left ATMs dry and bank apps crashing. Nigerians flooded into wallets that stayed up, and OPay's user base quadrupled that year. It's now an everyday way to pay traders and top up airtime, backed by agents across the country, and Opera's filings have valued it at close to $3 billion.",
+  fine:"Regulators have pushed back. In April 2024 the central bank froze new-customer sign-ups at OPay and other fintechs over know-your-customer failures, amid a crackdown on crypto and currency trading, and later fined OPay ₦1 billion; onboarding resumed in June. Since April 2026, point-of-sale agents may work for only one provider, and new central bank rules take aim at market concentration.",
+  sources:[["TechCabal: ORide, Gokada banned in Lagos (2020)","https://techcabal.com/2020/01/27/oride-maxng-gokada-banned-in-lagos/"],["TechCabal: OPay's core payments still growing (2020)","https://techcabal.com/2020/06/11/exclusive-opays-core-payments-business-is-still-growing/"],["TechCabal: OPay valuation nears $3 billion","https://techcabal.com/2024/04/29/opay-valuation-nears-3billion/"],["TechCabal: OPay, PalmPay and the mobile money rush","https://techcabal.com/2025/08/25/opay-palmpay-lead-20trn-mobile-money-boom/"],["BusinessDay: CBN lifts onboarding restriction","https://businessday.ng/technology/article/cbn-lifts-restriction-on-moniepoint-opay-others/"],["Ecofin Agency: bank failures pushed users to OPay and PalmPay","https://www.ecofinagency.com/insights/0809-48489-in-nigerian-bank-technology-failures-pushed-opay-and-palmpay-to-leadership-in-daily-payments"],["TheRadar: new CBN fintech rules (2026)","https://theradar.ng/business/cbns-new-fintech-rules-what-opay-and-moniepoint-users-must-know-before-december-31"],["234Drive: the okada story","https://234drive.com/the-okada-story-how-motorcycle-taxis-took-over-nigerias-streets/"]]
+},
+{ id:"ifood", name:"iFood", country:"Brazil", flag:"🇧🇷", region:"Americas", type:"Delivery", glyph:"bowl", c:["#ff6b6b","#a61e4d"],
+  tagline:"A printed menu guide that ate Brazil's dinner.",
+  founded:"May 2011, São Paulo (roots in Disk Cook, 1997)",
+  reach:"~80% of meal delivery; 180M+ orders a month; ~600,000 couriers (2026)",
+  does:["Restaurant delivery","Groceries & pharmacy","Courier","iFood Pago","Loyalty club"],
+  doFirst:"Scroll your neighbourhood's restaurants. In an April 2026 survey, 99.1% of Brazilian establishments that deliver through apps were on iFood.",
+  story:"The idea goes back to Disk Cook, a printed menu guide with a phone-ordering call centre that Patrick Sigrist started in São Paulo in 1997. He and partners founded iFood in 2011, and Movile, the tech group led by Fabrício Bloisi, invested in 2013. A string of mergers followed, and in 2022 Prosus, through Movile, bought the last third from Just Eat for $1.8 billion to take full control. Bloisi went on to run Prosus itself.",
+  meaning:"iFood is less a brand than Brazil's delivery infrastructure. A study it commissioned credits it with 0.64% of GDP, and restaurant groups speak of depending on a single platform. Its couriers, many on motorbikes, are part of the streetscape of every big city.",
+  fine:"Couriers are independent contractors, and stoppages have become recurring: the 2020 “Breque dos Apps,” a national strike in March 2025 and another in September 2026 demanding a R$10 minimum for deliveries up to 4 km. The competition regulator CADE limited iFood's exclusive deals with restaurants in 2023, opening the door for DiDi's 99Food and Meituan's Keeta, whose subsidy war is itself under antitrust scrutiny. A bill to regulate app work, PLP 152/2025, is before Congress.",
+  sources:[["iFood: our history and numbers","https://institucional.ifood.com.br/institucional/o-que-e-o-ifood/"],["B3: from printed menu to tech giant","https://borainvestir.b3.com.br/podcasts-b3/de-onde-vem-o-ticker/ifood-do-cardapio-impresso-a-um-gigante-de-tecnologia-da-america-latina/"],["Wikipedia: iFood","https://en.wikipedia.org/wiki/IFood"],["Money Times: the delivery war (80% share)","https://www.moneytimes.com.br/mercado-bilionario-denuncias-e-espionagem-guerra-do-delivery-no-brasil-coloca-ifood-99food-e-keeta-em-rota-de-colisao/"],["Bares & Restaurantes: Abrasel April 2026 survey","https://bareserestaurantes.com.br/vendas/concorrencia-apps-delivery-ifood-keeta-99food"],["TechTudo: couriers strike iFood, 99Food and Keeta (2026)","https://www.techtudo.com.br/noticias/2026/09/greve-dos-entregadores-motoboys-paralisam-ifood-99food-e-keeta-edapps.ghtml"]]
+}
+];
+
+const REGIONS = ["All","Asia","Middle East","Europe","Africa","Americas"];
+const TYPES = ["All","Super-app","Wallet","Messenger","Delivery","Government"];
+const state = {region:"All", type:"All", q:""};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function iconHTML(a, withBadge){
+  return '<span class="icon" style="background:linear-gradient(145deg,'+a.c[0]+','+a.c[1]+')">'+svg(a.glyph)+
+    '<span class="flag" aria-hidden="true">'+a.flag+'</span>'+
+    (withBadge && a.caveat ? '<span class="badge" aria-hidden="true">!</span>' : '')+'</span>';
+}
+
+// Home grid
+const grid = document.getElementById('grid');
+APPS.forEach((a,i) => {
+  const b = document.createElement('button');
+  b.className = 'app'; b.dataset.i = i;
+  b.setAttribute('aria-label', a.name+', '+a.country+(a.caveat?', context note':''));
+  b.innerHTML = iconHTML(a,true)+'<span class="lbl">'+esc(a.name)+'</span>';
+  b.addEventListener('click', () => openSheet(i, b));
+  grid.appendChild(b);
+});
+
+// Dock
+const dock = document.getElementById('dock');
+REGIONS.forEach(r => {
+  const c = document.createElement('button');
+  c.className='chip'; c.textContent=r; c.setAttribute('aria-pressed', r===state.region?'true':'false');
+  c.addEventListener('click', () => { state.region=r; dock.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed', x===c?'true':'false')); apply(); });
+  dock.appendChild(c);
+});
+
+// Library
+const lib = document.getElementById('library');
+APPS.forEach((a,i) => {
+  const r = document.createElement('button');
+  r.className='row'; r.dataset.i=i;
+  r.innerHTML = iconHTML(a,true)+'<span class="txt"><span class="t1">'+esc(a.name)+'<em>'+esc(a.country)+' · '+esc(a.type)+'</em></span><span class="t2">'+esc(a.tagline)+'</span></span><span class="get">OPEN</span>';
+  r.addEventListener('click', () => openSheet(i, r));
+  lib.appendChild(r);
+});
+const segs = document.getElementById('segs');
+TYPES.forEach(t => {
+  const s = document.createElement('button');
+  s.className='seg'; s.textContent=t; s.setAttribute('aria-pressed', t===state.type?'true':'false');
+  s.addEventListener('click', () => { state.type=t; segs.querySelectorAll('.seg').forEach(x=>x.setAttribute('aria-pressed', x===s?'true':'false')); apply(); });
+  segs.appendChild(s);
+});
+
+document.getElementById('search').addEventListener('input', e => { state.q = e.target.value.trim().toLowerCase(); apply(); });
+
+function matches(a){
+  const q = state.q;
+  const okQ = !q || (a.name+' '+a.country).toLowerCase().includes(q);
+  const okR = state.region==='All' || a.region===state.region;
+  const okT = state.type==='All' || a.type===state.type;
+  return {grid: okQ && okR && okT, list: okQ && okR && okT};
+}
+function apply(){
+  let n=0;
+  grid.querySelectorAll('.app').forEach(b => { const m = matches(APPS[b.dataset.i]); b.classList.toggle('dim', !m.grid); b.tabIndex = m.grid?0:-1; });
+  lib.querySelectorAll('.row').forEach(r => { const m = matches(APPS[r.dataset.i]); r.hidden = !m.list; if(m.list) n++; });
+  document.getElementById('empty').style.display = n ? 'none' : 'block';
+}
+
+// Sheet
+const sheet = document.getElementById('sheet'), scrim = document.getElementById('scrim'), body = document.getElementById('sheet-body');
+let cur = -1, opener = null;
+function visibleIdx(){ return APPS.map((a,i)=>i).filter(i => matches(APPS[i]).list); }
+function render(i){
+  const a = APPS[i];
+  const vis = visibleIdx(); const p = vis.indexOf(i);
+  document.getElementById('pos').textContent = (p>=0 ? (p+1)+' of '+vis.length : '');
+  body.innerHTML =
+    '<div class="sh-head">'+iconHTML(a,false)+'<div><h2 id="sh-title">'+esc(a.name)+'</h2><div class="sub">'+a.flag+' '+esc(a.country)+' · '+esc(a.type)+' · '+esc(a.region)+'</div><div class="tag">'+esc(a.tagline)+'</div></div></div>'+
+    (a.caveat ? '<div class="caveat"><span class="ci" aria-hidden="true">!</span><div><b>Context</b><p>'+esc(a.caveat)+'</p></div></div>' : '')+
+    (a.bench ? '<div class="bench"><b>Benchmark entry</b>'+esc(a.bench)+'</div>' : '')+
+    '<div class="pills"><div class="pill"><b>Founded</b><span>'+esc(a.founded)+'</span></div><div class="pill"><b>Reach</b><span>'+esc(a.reach)+'</span></div></div>'+
+    '<div class="dofirst"><span class="di" aria-hidden="true">→</span><div><b>Do this first</b><p>'+esc(a.doFirst)+'</p></div></div>'+
+    (a.lingo ? '<div class="lingo"><b>Local lingo</b><span><strong>'+esc(a.lingo[0])+'</strong>: '+esc(a.lingo[1])+'</span></div>' : '')+
+    '<div class="card"><h3>What it does</h3><div class="chips">'+a.does.map(d=>'<span>'+esc(d)+'</span>').join('')+'</div></div>'+
+    '<div class="card"><h3>The story</h3><p>'+esc(a.story)+'</p></div>'+
+    '<div class="card"><h3>What it means locally</h3><p>'+esc(a.meaning)+'</p></div>'+
+    '<div class="card fine"><h3>The fine print</h3><p>'+esc(a.fine)+'</p></div>'+
+    '<details class="src"><summary>Sources ('+a.sources.length+')</summary><ol>'+a.sources.map(s=>'<li><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a></li>').join('')+'</ol></details>';
+  body.scrollTop = 0;
+}
+function openSheet(i, from){
+  cur = i; opener = from || null; render(i);
+  sheet.classList.add('on'); scrim.classList.add('on'); document.body.classList.add('lock');
+  document.getElementById('close').focus({preventScroll:true});
+}
+function closeSheet(){
+  sheet.classList.remove('on'); scrim.classList.remove('on'); document.body.classList.remove('lock');
+  if (opener) opener.focus({preventScroll:true});
+}
+function step(d){
+  const vis = visibleIdx(); if(!vis.length) return;
+  let p = vis.indexOf(cur); p = p<0 ? 0 : (p + d + vis.length) % vis.length;
+  cur = vis[p]; render(cur);
+}
+document.getElementById('close').onclick = closeSheet;
+document.getElementById('grabber').onclick = closeSheet;
+scrim.onclick = closeSheet;
+document.getElementById('prev').onclick = () => step(-1);
+document.getElementById('next').onclick = () => step(1);
+document.addEventListener('keydown', e => {
+  if (!sheet.classList.contains('on')) return;
+  if (e.key==='Escape') closeSheet();
+  if (e.key==='ArrowRight') step(1);
+  if (e.key==='ArrowLeft') step(-1);
+});
+// swipe down on sheet header to close
+(function(){
+  let y0=null; const top=document.querySelector('.sheet-top');
+  top.addEventListener('touchstart', e=>{y0=e.touches[0].clientY}, {passive:true});
+  top.addEventListener('touchend', e=>{ if(y0!==null && e.changedTouches[0].clientY - y0 > 60) closeSheet(); y0=null; });
+})();
+
+// Playful bits
+document.getElementById('homebar').addEventListener('click', () => {
+  grid.classList.add('jiggle'); setTimeout(()=>grid.classList.remove('jiggle'), 2200);
+});
+function tick(){ const d=new Date(); document.getElementById('clock').textContent = d.getHours()%12===0?12+':'+String(d.getMinutes()).padStart(2,'0'):(d.getHours()%12)+':'+String(d.getMinutes()).padStart(2,'0'); }
+tick(); setInterval(tick, 30000);
+apply();
+</script>
+</body>
+</html>
